@@ -17,7 +17,9 @@ function serveIndex(req, res) {
   if (!view) {
     view = fs.readFileSync(filePath).toString('utf8');
   }
-  view = view.replace('$jsurl', mode === 'prod' ? '/dist/client.min.js' : 'http://localhost:3000/client.js');
+  view = view
+    .replace('$jsurl', mode === 'prod' ? '/dist/client.min.js' : 'http://localhost:3000/client.js')
+    .replace('$cssurl', mode === 'prod' ? '/dist/client.min.css' : 'http://localhost:3000/client.css');
   res.type('html').send(view);
 }
 
